@@ -1,0 +1,6 @@
+1)  /Users/cmdb/data/rawdata $ fastqc --casava SRR072893.fastq
+2) /Users/cmdb/data/genomes $ hisat2 -p 4 -x BDGP6 -U ../rawdata/SRR072893.fastq -S 893_alignment.sam
+3) /Users/cmdb/data/genomes $ samtools view -bS 893_alignment.sam > 893_alignment.bam
+	/Users/cmdb/data/genomes $ samtools sort 893_alignment.bam -o 893_alignment.sorted.bam
+	/Users/cmdb/data/genomes $ samtools index 893_alignment.sorted.bam 
+4) /Users/cmdb/data/genomes $ stringtie 893_alignment.sorted.bam -p 4 -e -G BDGP6.Ensembl.81.gtf -o output.gtf -B
