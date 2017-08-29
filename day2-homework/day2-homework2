@@ -1,0 +1,37 @@
+#!/usr/bin/env python
+
+import sys 
+
+file1 = open(sys.argv[1]) #day2-homework1.out
+file2 = open(sys.argv[2]) #t_data.ctab
+#file3 = open(sys.argv[3]) # 
+
+count = 0
+
+dic = {}
+
+for line in file1:
+    apple = line.strip().split(" ")
+    #print apple
+    
+    fly = apple[0]
+    uni = apple[1]
+    dic[fly] = uni
+    
+for line in file2:
+    orange = line.strip("\r\n").split("\t")
+    sand = orange[8]
+    
+    #print sand
+    
+    if sand in dic:
+        name = dic[sand]
+        
+     #  print sand, name
+        orange[8] = name
+    count += 1
+    if count > 100:
+        break
+    print "\t".join(orange)
+         
+     
