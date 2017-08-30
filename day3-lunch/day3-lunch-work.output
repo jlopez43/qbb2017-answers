@@ -1,0 +1,5 @@
+[0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
+checking in the range [0, 10] mididx[5]=50
+checking in the range [0, 5] mididx[2]=20
+checking in the range [3, 5] mididx[4]=40
+hooray! found 40==40 at 4
