@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+
+import random
+
+r = random.randint(1,100)
+
+#print r
+
+
+nums = range(0, 100, 10)
+print nums
+
+## initialize the whole is to be searched
+
+key = 40
+low = 0
+high = len(nums)
+
+##main loop: keep going while there are options available
+
+
+#for i, v in enumerate( nums ):
+
+#for i in xrange(len(nums)):
+while high > low:
+    mididx = (low + high)/2
+    mid = nums[mididx]
+    
+    print "checking in the range [%d, %d] mididx[%d]=%d" % (low, high, mididx, mid)
+
+##compare teh middle item to teh list
+
+    #v = nums[i]
+    
+    if (mid == key):
+        print "hooray! found %d==%d at %d" % (key, mid, mididx)
+        break
+    elif (key > mid):
+        low = mididx + 1
+    else:
+        high = mididx
+    
+   # print "scanning the %dth number is %d" % (i, r)
+    #if (v == key) and key > mid:
+     #   print "Found it at position %d" % (i)
