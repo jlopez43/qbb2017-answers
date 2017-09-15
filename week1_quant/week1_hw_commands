@@ -1,0 +1,6 @@
+awk '{gsub ("-","")}{print ">" $1 "\n" $2}' blast_alignment.tsv > 1000_homs.fa
+
+transeq 1000_homs.fa 1000_protein.fa
+Translate nucleic acid sequences
+
+mafft 1000_protein.fa > protein_alignment.fa
