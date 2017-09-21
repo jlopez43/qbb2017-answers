@@ -1,0 +1,53 @@
+
+
+
+
+Part1
+time velveth week2_quant 31 -shortPaired -fastq -separate reads_low_1.fastq reads_low_2.fastq
+time velvetg week2_quant/
+
+
+time spades.py -1 reads_low_1.fastq -2 reads_low_2.fastq -o ./spades_actual
+
+
+time lastz reference.fasta ./week2_quant/contigs.fa --format=general:zstart1,end1,name2 --chain --output=velvet_low_dot.out
+time lastz reference.fasta ./spades_actual/contigs.fasta --format=general:zstart1,end1,name2 --chain --output=spades_low_dot.out
+
+
+sort -k 1 -n velvet_low_dot.out > velvet_low_dot_sorted.out
+sort -k 1 -n spades_low_dot.out > spades_low_dot_sorted.out
+
+
+
+
+
+Part2
+time spades.py -1 reads_low_1.fastq -2 reads_low_2.fastq --nanopore MAP006.subset.fa -o ./spades_nano
+
+
+time lastz reference.fasta ./spades_nano/contigs.fasta --format=general:zstart1,end1,name2 --chain --output=spades_nano_dot.out
+
+
+sort -k 1 -n spades_nano_dot.out > spades_nano_dot_sorted.out
+
+
+
+
+
+Part3
+time velveth last_part_velvet 31 -shortPaired -fastq -separate reads_1.fastq reads_2.fastq 
+time velvetg last_part_velvet/
+
+
+time lastz reference.fasta ./last_part_velvet/contigs.fa --format=general:zstart1,end1,name2 --chain --output=last_velvet_low_dot.out
+time lastz reference.fasta ./last_part_spades/contigs.fasta --format=general:zstart1,end1,name2 --chain --output=last_spades_low_dot.out
+
+
+
+sort -k 1 -n last_spades_low_dot.out >last_spades_low_dot_sorted.out
+sort -k 1 -n last_velvet_low_dot.out >last_velvet_low_dot_sorted.out
+
+
+Part4
+quast ./week2_quant/contigs.fa ./last_part_velvet/contigs.fa ./last_part_spades/contigs.fasta ./spades_actual/contigs.fasta ./spades_nano/contigs.fasta -R reference.fasta
+
