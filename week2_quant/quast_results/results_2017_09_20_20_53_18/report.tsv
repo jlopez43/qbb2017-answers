@@ -1,0 +1,25 @@
+Assembly	week2_quant_contigs	last_part_velvet_contigs	last_part_spades_contigs	spades_actual_contigs	spades_nano_contigs
+# contigs (>= 0 bp)	305	16	1	128	65
+# contigs (>= 1000 bp)	0	7	1	4	20
+# contigs (>= 5000 bp)	0	7	1	0	3
+# contigs (>= 10000 bp)	0	4	1	0	0
+# contigs (>= 25000 bp)	0	1	1	0	0
+# contigs (>= 50000 bp)	0	0	1	0	0
+Total length (>= 0 bp)	56973	100309	100000	49818	72814
+Total length (>= 1000 bp)	0	99584	100000	5313	58394
+Total length (>= 5000 bp)	0	99584	100000	0	19533
+Total length (>= 10000 bp)	0	81134	100000	0	0
+Total length (>= 25000 bp)	0	33235	100000	0	0
+Total length (>= 50000 bp)	0	0	100000	0	0
+# contigs	11	7	1	20	24
+Largest contig	998	33235	100000	1737	6735
+Total length	7243	99584	100000	15922	61012
+Reference length	4639675	4639675	4639675	4639675	4639675
+GC (%)	50.71	52.58	52.59	51.21	52.37
+Reference GC (%)	50.79	50.79	50.79	50.79	50.79
+N50	632	19911	100000	718	3698
+N75	542	13440	100000	635	1843
+L50	5	2	1	8	6
+L75	8	4	1	13	12
+# N's per 100 kbp	0.00	0.00	0.00	0.00	0.00
+NGA50	-	-	-	-	-
