@@ -1,0 +1,25 @@
+
+tar xfv BYxRM_subset.tar.xv
+
+tar -xf Saccharomyces_cerevisiae_UCSC_sacCer3.tar
+
+bwa mem -R '@RG\tID:A01_63\tSM:A01_63’ -o A01_63.sam genome.fa A01_63.fastq 
+
+samtools sort A01_62.sam -o A01_62.sorted.bam
+
+samtools index A01_63.sorted.bam
+
+
+freebayes -f genome.fa -b A01_09.sorted.bam A01_11.sorted.bam A01_23.sorted.bam A01_24.sorted.bam A01_27.sorted.bam A01_31.sorted.bam A01_35.sorted.bam A01_39.sorted.bam A01_62.sorted.bam A01_63.sorted.bam > freebayes.vcf
+
+vcffilter -f "QUAL > 100" freebayes.vcf > real_filtered.vcf
+
+./histogram.py real_filtered.vcf
+
+snpEff download R64-1-1.86
+
+snpEff R64-1-1.86 real_filtered.vcf > annotated_filtered.vcf
+
+tail -n+84 annotated_filtered.vcf > nohead_annotated.vcf
+
+sort -k 6,6 -r -n nohead_annotated.vcf -o sorted_annotated.vcf
