@@ -1,0 +1,6 @@
+
+gunzip BYxRM_segs_saccer3.bam.simplified.vcf.xz
+ 
+plink2 --vcf BYxRM_segs_saccer3.bam.simplified.vcf --pca 2 --allow-extra-chr --mind
+ 
+plink2 --vcf BYxRM_segs_saccer3.bam.simplified.vcf --pheno pheno_split.txt --allow-no-sex --linear --allow-extra-chr --all-pheno
