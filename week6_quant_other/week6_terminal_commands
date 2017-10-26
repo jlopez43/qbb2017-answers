@@ -1,0 +1,32 @@
+bowtie2-build -f chr19.fa chr19_index
+
+
+bowtie2 -x chr19_index CTCF_ER4.fastq -S CTCF_ER4.sam
+bowtie2 -x chr19_index CTCF_G1E.fastq -S CTCF_G1E.sam
+bowtie2 -x chr19_index input_ER4.fastq -S input_ER4.sam
+bowtie2 -x chr19_index input_G1E.fastq -S input_G1E.sam
+
+
+macs2 callpeak -c input_ER4.sam -t CTCF_ER4.sam -g 61431566  --outdir macs_ER4 
+macs2 callpeak -c input_G1E.sam -t CTCF_G1E.sam -g 61431566  --outdir macs_G1E 
+
+
+bedtools intersect -a macs_ER4/NA_peaks.narrowPeak -b macs_G1E/NA_peaks.narrowPeak -v > diffgain.bed
+bedtools intersect -a macs_G1E/NA_peaks.narrowPeak -b macs_ER4/NA_peaks.narrowPeak -v > diffloss.bed
+
+
+cat diffgain.bed | head -n 100 > diffgain100.bed
+cat diffloss.bed | head -n 100 > diffloss100.bed
+
+
+
+bedtools getfasta -fi chr19.fa -bed macs_G1E/NA_peaks.narrowPeak > G1E.fa
+bedtools getfasta -fi chr19.fa -bed macs_ER4/NA_peaks.narrowPeak > ER4.fa
+
+
+cat G1E.fa ER4.fa > CTCF_concat_motif.fa
+
+
+
+/usr/local/opt/meme/bin/meme-chip -meme-maxw 20 -db motif_databases/JASPAR/JASPAR_CORE_2016_vertebrates.meme G1E.fa
+/usr/local/opt/meme/bin/meme-chip -meme-maxw 20 -db motif_databases/JASPAR/JASPAR_CORE_2016_vertebrates.meme ER4.fa
